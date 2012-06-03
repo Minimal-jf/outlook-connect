@@ -1,14 +1,5 @@
 <?php
 
-/**
- * This is the model class for table "tbl_user".
- *
- * The followings are the available columns in table 'tbl_user':
- * @property integer $id
- * @property string $username
- * @property string $password
- * @property string $email
- */
 class User extends CActiveRecord
 {
 	/**
@@ -26,7 +17,7 @@ class User extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'tbl_user';
+		return 'actor';
 	}
 
 	/**
@@ -37,11 +28,12 @@ class User extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('username, password, email', 'required'),
-			array('username, password, email', 'length', 'max'=>128),
+			array('name, password, email', 'required'),
+			array('name, password, email', 'length', 'max'=>128),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, username, password, email', 'safe', 'on'=>'search'),
+			array('id, name, password, email', 'safe', 'on'=>'search'),
+			array('name,email', 'unique')
 		);
 	}
 
@@ -63,7 +55,7 @@ class User extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'username' => 'Username',
+			'name' => 'Username',
 			'password' => 'Password',
 			'email' => 'Email',
 		);
@@ -81,7 +73,7 @@ class User extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('username',$this->username,true);
+		$criteria->compare('name',$this->name,true);
 		$criteria->compare('password',$this->password,true);
 		$criteria->compare('email',$this->email,true);
 

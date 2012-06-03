@@ -14,7 +14,7 @@ class UserIdentity extends CUserIdentity
 	public function authenticate()
 	{
 		
-		$user=User::model()->find('username=:username', array(':username'=>$this->username));
+		$user=User::model()->find('name=:username', array(':username'=>$this->username));
 
 		if(is_null($user))
 			$this->errorCode=self::ERROR_USERNAME_INVALID;
